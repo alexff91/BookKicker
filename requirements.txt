@@ -16,3 +16,5 @@ transliterate==1.10.2
 tzlocal==2.1
 urllib3==1.26.5
 psycopg2==2.9
+Flask==2.0.1
+telebot==0.0.4
