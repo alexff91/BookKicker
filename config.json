@@ -1,0 +1,74 @@
+{
+  "message_success_start": {
+    "ru": "Привет! Я бот для чтения книг.\nВы можете прислать мне файл книги в формате .epub и начать читать.\n-----\nЯ буду напоминать о книге. Каждый день буду присылать маленький отрывок каждый час.\nОстановить напоминания можно командой /stop_auto\nПомощь /help\nПереключиться на \uD83C\uDDEC\uD83C\uDDE7 /change_lang",
+    "en": "Hello! It seems you are a new user! Glad to see you!\nPlease send me .epub file for start reading.\n-----\nI will notify you with a little piece of text every hour.\nYou can stop auto-notification by command /stop_auto\nFor more info use command /help\n"
+  },
+  "message_file_added": {
+    "ru": "Файл успешно добавлен! Начните читать командой /more\nДля помощи используйте /help\n",
+    "en": "Success! File added.\nFor start reading use command /more\nFor more info use /help\n"
+  },
+  "error_file_type": {
+    "ru": "Ошибка! Принимаю только файлы .epub ",
+    "en": "Error! Only .epub files allowed"
+  },
+  "error_file_adding_failed": {
+    "ru": "Ошибка! Не удалось сохранить файл. Попробуйте еще раз",
+    "en": "Error! I failed with saving file. Try again"
+  },
+  "error_current_book": {
+    "ru": "Я не знаю такой книги",
+    "en": "I do not know your current book"
+  },
+  "error_book_recognition": {
+    "ru": "Ошибка! Я не распознал имя книги.\nВыбирайте из /my_books.\nДля помощи используйте /help",
+    "en": "Error! I do not recognize this book name.\nChoose one from /my_books\nFor more info use /help\n"
+  },
+  "error_user_finding": {
+    "ru": "Извините, не узнаю вас в гриме. Начните с команды /start",
+    "en": "Sorry, did not find you in users. Try command /start"
+  },
+  "error_lang_recognition": {
+    "ru": "Извините, такой язык недоступен. Пожалуйста, выбирайте из списка на клавиатуре. /change_lang",
+    "en": "Sorry, did not recognize this language. Please choose one from keyboard /change_lang"
+  },
+  "message_everyday_ON": {
+    "ru": "Ежечасная рассылка включена. Для остановки /stop_auto",
+    "en": "Every hour auto send is ON. /stop_auto"
+  },
+  "message_everyday_OFF": {
+    "ru": "Ежечасная рассылка вЫключена. Для запуска /start_auto",
+    "en": "Every hour send is OFF. /start_auto"
+  },
+  "message_book_finished": {
+    "ru": "Поздравялю! Книга окончнеа.\nДля чтения ранее загруженных книг - /my_books\nИли пришлите файл новой книге в формате .epub",
+    "en": "Congratulations! The book is finished.\nStart already uploaded /my_books\nOr send a new .epub file."
+  },
+  "message_dont_understand": {
+    "ru": "Я не понял команду {}.\nДоступные команды - /help",
+    "en": "I do not understand {}.\nSee commands at /help"
+  },
+  "message_lang_changed": {
+    "ru": "Язык успешно изменен.\nПомощь: /help",
+    "en": "Success! Language has been changed.\nSee commands at /help"
+  },
+  "message_now_reading": {
+    "ru": "Сейчас вы читаете: {}. /more",
+    "en": "Now you are reading: {}. /more"
+  },
+  "message_booklist": {
+    "ru": "Список ваших книг:\n",
+    "en": "'Your books list:\n"
+  },
+  "message_choose_book": {
+    "ru": "------\nВыберите книгу для чтения",
+    "en": "------\nChoose the book for start reading"
+  },
+  "message_help": {
+    "ru": "Я бот для чтения книг\nВы можете прислать мне файл книги в формате .epub и начать читать.\n-----\nЯ буду напоминать о книге. Каждый день буду присылать маленький отрывок каждый час.\nОстановить напоминания можно командой /stop_auto\nЗапросить очередной кусочек книги можно командой /more\nДругие команды вы можете видеть на клавиатуре в поле ввода.\nПриятного чтения!\nПереключиться на \uD83C\uDDEC\uD83C\uDDE7 /change_lang",
+    "en": "I am bot for reading books.\nYou can send me .epub file and start reading it.\n-----\nI will notify you with a little piece of text every hour.\nYou can request next piece of text by command /more\nYou can stop auto-notification at any moment by command /stop_auto\nOther available commands are on the keyboard under text field.\nGood luck!\nChange language /change_lang"
+  },
+  "message_empty_booklist": {
+    "ru": "Список книг пуст\n",
+    "en": "Your book list is empty\n"
+  }
+}

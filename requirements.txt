@@ -1,0 +1,18 @@
+APScheduler==3.7.0
+beautifulsoup4==4.9.3
+bs4==0.0.1
+certifi==2021.5.30
+chardet==4.0.0
+-e git://github.com/aerkalov/ebooklib.git@6a004d4ae3d6da44575a482aa3f605e9484f7b0c#egg=EbookLib
+idna==3.2
+langdetect==1.0.9
+lxml==4.6.3
+nltk==3.6.2
+pyTelegramBotAPI==3.7.9
+pytz==2021.1
+requests==2.25.1
+six==1.16.0
+transliterate==1.10.2
+tzlocal==2.1
+urllib3==1.26.5
+psycopg2==2.9
