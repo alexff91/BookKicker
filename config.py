@@ -35,5 +35,5 @@ error_lang_recognition = cfg.get('error_lang_recognition', '')
 webhook_port = 8443  # 443, 80, 88 or 8443 (port need to be 'open')
 webhook_listen = '0.0.0.0'
 
-webhook_ssl_cert = './webhook_cert.pem'  # Path to the ssl certificate
-webhook_ssl_priv = './webhook_pkey.pem'  # Path to the ssl private key
+webhook_ssl_cert = './cert.pem'  # Path to the ssl certificate
+webhook_ssl_priv = './key.pem'  # Path to the ssl private key
