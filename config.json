@@ -24,7 +24,7 @@
     "en": "Error! I do not recognize this book name.\nChoose one from /my_books\nFor more info use /help\n"
   },
   "error_user_finding": {
-    "ru": "Извините, не узнаю вас в гриме. Начните с команды /start",
+    "ru": "Извините, не узнаю вас в маске. Начните с команды /start",
     "en": "Sorry, did not find you in users. Try command /start"
   },
   "error_lang_recognition": {
