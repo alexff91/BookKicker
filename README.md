@@ -18,3 +18,6 @@ Commands:
 /more - force request next peace of text
 
 /help - other info
+
+##Start server
+nohup python3 telebot_handler.py /dev/null 2>&1&
