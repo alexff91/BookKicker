@@ -29,7 +29,7 @@ class TestEpubReader(unittest.TestCase):
         for i in range(4):
             text = efr.get_next_item_text()
         result = text.split()
-        self.assertEqual(result[1], 'Саймон')
+        self.assertEqual(result[1], 'II')
 
 
 if __name__ == '__main__':

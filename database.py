@@ -28,7 +28,7 @@ class DataBase:
             chatId INTEGER,
             bookName TEXT UNIQUE,
             isAutoSend INTEGER,
-            lang TEXT UNIQUE);
+            lang TEXT);
             """
         cursor.execute(sql2)
         cursor.close()

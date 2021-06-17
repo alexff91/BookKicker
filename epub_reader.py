@@ -3,6 +3,41 @@ from bs4 import BeautifulSoup as bs
 from ebooklib import epub
 
 
+def chap2text(chap):
+    output = ''
+    soup = bs(chap, 'html.parser')
+    blacklist = ['[document]', 'noscript', 'header', 'html', 'meta', 'head', 'input', 'script', ]
+    # there may be more elements you don't want, such as "style", etc.
+    text = soup.find_all(text=True)
+    for t in text:
+        if t.parent.name not in blacklist:
+            output += '{} '.format(t)
+    return output
+
+
+def thtml2ttext(thtml):
+    Output = []
+    for html in thtml:
+        text = chap2text(html)
+        Output.append(text)
+    return Output
+
+
+def epub2text(epub_path):
+    chapters = epub2thtml(epub_path)
+    ttext = thtml2ttext(chapters)
+    return ttext
+
+
+def epub2thtml(epub_path):
+    book = epub.read_epub(epub_path)
+    chapters = []
+    for item in book.get_items():
+        if item.get_type() == ebooklib.ITEM_DOCUMENT:
+            chapters.append(item.get_content())
+    return chapters
+
+
 class EpubReader:
     # reade text from epub file
 
@@ -55,5 +90,14 @@ class EpubReader:
             return None
         item_id = self.item_ids.pop(0)
         item_doc = self.book.get_item_with_id(item_id)
-        soup = bs(item_doc.content.decode('utf-8'), "lxml")
-        return soup.body.get_text()
+        # soup = bs(item_doc.content.decode('utf-8'), "lxml")
+        # return soup.body.get_text()
+        soup = bs(item_doc.content.decode('utf-8'), 'html.parser')
+        blacklist = ['[document]', 'noscript', 'header', 'html', 'meta', 'head', 'input', 'script', ]
+        # there may be more elements you don't want, such as "style", etc.
+        text = soup.find_all(text=True)
+        output = ''
+        for t in text:
+            if t.parent.name not in blacklist:
+                output += '{} '.format(t)
+        return output
