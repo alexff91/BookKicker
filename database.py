@@ -1,5 +1,7 @@
 import psycopg2
+
 import tokens
+
 
 class DataBase:
     """work with DataBase"""
@@ -8,10 +10,10 @@ class DataBase:
         # Create table and DB if they does not exists
         # conn = sqlite3.connect('books_pos_table.sqlite')
         conn = psycopg2.connect(user=tokens.user,
-                                      password=tokens.password,
-                                      host=tokens.host,
-                                      port="5432",
-                                      database=tokens.db)
+                                password=tokens.password,
+                                host=tokens.host,
+                                port="5432",
+                                database=tokens.db)
         cursor = conn.cursor()
         sql = """
             CREATE TABLE IF NOT EXISTS books_pos_table (
@@ -80,8 +82,8 @@ class DataBase:
         VALUES('1-isAutoSend',{0}) 
         ON CONFLICT (userId) 
         DO 
-         UPDATE SET isAutoSend=1-isAutoSend WHERE userId={1};
-         """.format(user_id,user_id)
+         UPDATE SET isAutoSend=1-isAutoSend;
+         """.format(user_id)
         cursor.execute(sql)
         cursor.close()
         conn.close()
@@ -100,8 +102,8 @@ class DataBase:
         VALUES('{0}',{1}) 
         ON CONFLICT (userId) 
         DO 
-         UPDATE SET lang='{2}' WHERE userId={3};
-         """.format(lang, user_id,lang, user_id)
+         UPDATE SET lang='{2}';
+         """.format(lang, user_id, lang)
         cursor.execute(sql)
         cursor.close()
         conn.close()
