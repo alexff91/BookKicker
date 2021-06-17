@@ -74,9 +74,14 @@ class DataBase:
                                 port="5432",
                                 database=tokens.db)
         cursor = conn.cursor()
+
         sql = """
-         UPDATE curent_book_table SET isAutoSend=1-isAutoSend WHERE userId={0};
-         """.format(user_id)
+        INSERT INTO curent_book_table (isAutoSend, userId)
+        VALUES('1-isAutoSend',{0}) 
+        ON CONFLICT (userId) 
+        DO 
+         UPDATE SET isAutoSend=1-isAutoSend WHERE userId={1};
+         """.format(user_id,user_id)
         cursor.execute(sql)
         cursor.close()
         conn.close()
@@ -91,8 +96,12 @@ class DataBase:
                                 database=tokens.db)
         cursor = conn.cursor()
         sql = """
-         UPDATE curent_book_table SET lang='{0}' WHERE userId={1};
-         """.format(lang, user_id)
+        INSERT INTO curent_book_table (lang, userId)
+        VALUES('{0}',{1}) 
+        ON CONFLICT (userId) 
+        DO 
+         UPDATE SET lang='{2}' WHERE userId={3};
+         """.format(lang, user_id,lang, user_id)
         cursor.execute(sql)
         cursor.close()
         conn.close()
