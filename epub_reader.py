@@ -99,8 +99,16 @@ class EpubReader:
         output = ''
         for t in text:
             if t.parent.name not in blacklist:
-                output += '{} '.format(t.replace('body {padding:0;} img {height: 100%; max-width: 100%;} div {text-align: center; page-break-after: always;}','\n')
+                output += '{} '.format(t.replace(
+                    'body {padding:0;} img {height: 100%; max-width: 100%;} div {text-align: center; page-break-after: always;}',
+                    '\n')
                                        .replace('Cover of ', '')
-                                       .replace('Cover body { margin: 0; padding:0 } div.cover { text-align: center; text-indent: 0px; margin:0; vertical-align:middle; } img { max-width:100%; height:100%; border: 0; }','')
-                                       .replace('page {padding: 0pt; margin:0pt} body { text-align: center; padding:0pt; margin: 0pt; }',''))
+                                       .replace(
+                    'Cover body { margin: 0; padding:0 } div.cover { text-align: center; text-indent: 0px; margin:0; vertical-align:middle; } img { max-width:100%; height:100%; border: 0; }',
+                    '')
+                                       .replace(
+                    'page {padding: 0pt; margin:0pt} body { text-align: center; padding:0pt; margin: 0pt; }', '')
+                                       .replace(
+                    'Cover @page {padding: 0pt; margin:0pt} body { text-align: center; padding:0pt; margin: 0pt; }',
+                    '').replace('Annotation', '\n'))
         return output
