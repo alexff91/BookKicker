@@ -23,7 +23,7 @@ class FileExtractor(object):
         # todo make it throw regex, ept
         if (filename.find('.epub') != -1):
             # file_from_user = save_file(downloaded_file, path_for_save, filename)
-            path_for_save = os.path.join(download_path, filename.isalnum())
+            path_for_save = os.path.join(download_path, filename)
             with open(path_for_save, 'wb') as new_file:
                 new_file.write(downloaded_file)
             return path_for_save
