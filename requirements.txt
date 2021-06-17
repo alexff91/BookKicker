@@ -4,7 +4,7 @@ bs4==0.0.1
 certifi==2021.5.30
 chardet==4.0.0
 -e git://github.com/aerkalov/ebooklib.git@6a004d4ae3d6da44575a482aa3f605e9484f7b0c#egg=EbookLib
-idna==3.2
+idna==2.5
 langdetect==1.0.9
 lxml==4.6.3
 nltk==3.6.2
