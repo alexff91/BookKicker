@@ -79,10 +79,10 @@ class DataBase:
 
         sql = """
         INSERT INTO curent_book_table (isAutoSend, userId)
-        VALUES('1-isAutoSend',{0}) 
+        VALUES(1,{0}) 
         ON CONFLICT (userId) 
         DO 
-         UPDATE SET isAutoSend=1-isAutoSend;
+         UPDATE SET isAutoSend=1;
          """.format(user_id)
         cursor.execute(sql)
         cursor.close()
