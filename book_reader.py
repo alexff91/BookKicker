@@ -21,4 +21,4 @@ class BookReader():
         txt_file = TxtFile()
         text_piece, i = txt_file.read_piece(file_path, pos, config.piece_size)
         self.books_lib.update_book_pos(user_id, current_book, i + 1)
-        return text_piece
+        return text_piece + '\n ```' + current_book + ' стр.' + str(i) + '```'

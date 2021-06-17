@@ -4,7 +4,7 @@
     "en": "Hello! It seems you are a new user! Glad to see you!\nPlease send me .epub file for start reading.\n-----\nI will notify you with a little piece of text every hour.\nYou can stop auto-notification by command /stop_auto\nFor more info use command /help\n"
   },
   "message_file_added": {
-    "ru": "Файл успешно добавлен\uD83D\uDD25!\n Начните читать командой /more\nДля помощи используйте /help\n",
+    "ru": "Файл успешно добавлен\uD83D\uDD25!\nНачните читать командой /more\nДля помощи используйте /help\n",
     "en": "Success\uD83D\uDD25! File added.\nTo start reading use command /more\nFor more info use /help\n"
   },
   "error_file_type": {
