@@ -99,5 +99,6 @@ class EpubReader:
         output = ''
         for t in text:
             if t.parent.name not in blacklist:
-                output += '{} '.format(t)
+                output += '{} '.format(t.replace('body {padding:0;} img {height: 100%; max-width: 100%;} div {text-align: center; page-break-after: always;}','\n')
+                                       .replace('Cover of ', ''))
         return output
