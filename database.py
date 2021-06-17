@@ -47,6 +47,7 @@ class DataBase:
         UPDATE books_pos_table SET pos={2} WHERE userId={0} and bookName='{1}';
         """.format(user_id, book_name, newpos)
         cursor.execute(sql)
+        conn.commit()
         cursor.close()
         conn.close()
         return 0
@@ -64,6 +65,7 @@ class DataBase:
         UPDATE curent_book_table SET bookName='{2}', isAutoSend=1, lang ='{4}'  WHERE userId={0};
         """.format(user_id, chat_id, book_name, 1, lang)
         cursor.execute(sql)
+        conn.commit()
         cursor.close()
         conn.close()
         return 0
@@ -85,6 +87,7 @@ class DataBase:
          UPDATE SET isAutoSend=1;
          """.format(user_id)
         cursor.execute(sql)
+        conn.commit()
         cursor.close()
         conn.close()
         return 0
@@ -105,6 +108,7 @@ class DataBase:
          UPDATE SET lang='{2}';
          """.format(lang, user_id, lang)
         cursor.execute(sql)
+        conn.commit()
         cursor.close()
         conn.close()
         return 0
