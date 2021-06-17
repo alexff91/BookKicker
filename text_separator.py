@@ -1,6 +1,8 @@
 import errno
 import re
+import nltk
 
+nltk.download('punkt')
 from nltk.tokenize import sent_tokenize
 
 
