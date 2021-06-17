@@ -1,6 +1,6 @@
 {
   "message_success_start": {
-    "ru": "Привет! Я бот для чтения книг.\nВы можете прислать мне файл книги в формате .epub и начать читать.\n-----\nЯ буду напоминать о книге. Каждый день буду присылать маленький отрывок каждый час.\nОстановить напоминания можно командой /stop_auto\nПомощь /help\nПереключиться на \uD83C\uDDEC\uD83C\uDDE7 /change_lang",
+    "ru": "Привет! Я бот для чтения книг BookKicker.\nВы можете прислать мне файл книги в формате .epub и начать читать.\n-----\nЯ буду каждый час с 8 утра до 8 вечера присылать маленький отрывок.\nОстановить напоминания можно командой /stop_auto\nПомощь /help\nПереключиться на \uD83C\uDDEC\uD83C\uDDE7 /change_lang",
     "en": "Hello! It seems you are a new user! Glad to see you!\nPlease send me .epub file for start reading.\n-----\nI will notify you with a little piece of text every hour.\nYou can stop auto-notification by command /stop_auto\nFor more info use command /help\n"
   },
   "message_file_added": {
@@ -64,7 +64,7 @@
     "en": "------\nChoose the book for start reading"
   },
   "message_help": {
-    "ru": "Я бот для чтения книг\nВы можете прислать мне файл книги в формате .epub и начать читать.\n-----\nЯ буду напоминать о книге. Каждый день буду присылать маленький отрывок каждый час.\nОстановить напоминания можно командой /stop_auto\nЗапросить очередной кусочек книги можно командой /more\nДругие команды вы можете видеть на клавиатуре в поле ввода.\nПриятного чтения!\nПереключиться на \uD83C\uDDEC\uD83C\uDDE7 /change_lang",
+    "ru": "Я бот для чтения книг BookKicker.\nВы можете прислать мне файл книги в формате .epub и начать читать.\n-----\nЯ буду каждый час с 8 утра до 8 вечера присылать маленький отрывок.\nОстановить напоминания можно командой /stop_auto\nЗапросить очередной кусочек книги можно командой /more\nДругие команды вы можете видеть на клавиатуре в поле ввода.\nПриятного чтения!\nПереключиться на \uD83C\uDDEC\uD83C\uDDE7 /change_lang",
     "en": "I am bot for reading books.\nYou can send me .epub file and start reading it.\n-----\nI will notify you with a little piece of text every hour.\nYou can request next piece of text by command /more\nYou can stop auto-notification at any moment by command /stop_auto\nOther available commands are on the keyboard under text field.\nGood luck!\nChange language /change_lang"
   },
   "message_empty_booklist": {
