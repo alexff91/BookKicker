@@ -65,4 +65,4 @@ class BooksLibrary(object):
         formatted_name = formatted_name.replace(str(user_id) + '_', '')
         formatted_name = formatted_name.replace('.txt', '')
         formatted_name = formatted_name.capitalize()
-        return formatted_name
+        return '📖' + formatted_name

@@ -4,8 +4,8 @@
     "en": "Hello! It seems you are a new user! Glad to see you!\nPlease send me .epub file for start reading.\n-----\nI will notify you with a little piece of text every hour.\nYou can stop auto-notification by command /stop_auto\nFor more info use command /help\n"
   },
   "message_file_added": {
-    "ru": "Файл успешно добавлен\uD83D\uDD25! Начните читать командой /more\nДля помощи используйте /help\n",
-    "en": "Success\uD83D\uDD25! File added.\nFor start reading use command /more\nFor more info use /help\n"
+    "ru": "Файл успешно добавлен\uD83D\uDD25!\n Начните читать командой /more\nДля помощи используйте /help\n",
+    "en": "Success\uD83D\uDD25! File added.\nTo start reading use command /more\nFor more info use /help\n"
   },
   "error_file_type": {
     "ru": "Ошибка! Принимаю только файлы .epub \uD83D\uDE1E",
@@ -20,8 +20,8 @@
     "en": "I do not know your current book"
   },
   "error_book_recognition": {
-    "ru": "Ошибка! Я не распознал имя книги.\nВыбирайте из /my_books.\nДля помощи используйте /help",
-    "en": "Error! I do not recognize this book name.\nChoose one from /my_books\nFor more info use /help\n"
+    "ru": "Ошибка! Я не распознал имя книги.\nДля помощи используйте /help",
+    "en": "Error! I do not recognize this book name.\nFor more info use /help\n"
   },
   "error_user_finding": {
     "ru": "Извините, не узнаю вас в маске. Начните с команды /start",
@@ -40,8 +40,8 @@
     "en": "Every hour send is OFF. /start_auto"
   },
   "message_book_finished": {
-    "ru": "Поздравялю! Книга завершена\uD83C\uDFC6.\nДля чтения ранее загруженных книг - /my_books\nИли пришлите файл новой книге в формате .epub",
-    "en": "Congratulations! The book is finished\uD83C\uDFC6.\nStart already uploaded /my_books\nOr send a new .epub file."
+    "ru": "Поздравялю! Книга завершена\uD83C\uDFC6.\nЕсли хотите читать новую книгу - пришлите новый файл в формате .epub",
+    "en": "Congratulations! The book is finished\uD83C\uDFC6.\nTo read a new book - send a new .epub file."
   },
   "message_dont_understand": {
     "ru": "Я не понял команду\uD83E\uDD16 {}.\nДоступные команды - /help",

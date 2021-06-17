@@ -6,7 +6,7 @@ from epub_reader import EpubReader
 
 class TestEpubReader(unittest.TestCase):
     def setUp(self):
-        self.epub_path = os.path.join(os.getcwd(), 'test_book.epub')
+        self.epub_path = os.path.join(os.getcwd(), 'test_book._some_spacec.here.epub')
         pass
 
     def tearDown(self):

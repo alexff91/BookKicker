@@ -55,7 +55,7 @@ def webhook():
 book_reader = BookReader()
 book_adder = BookAdder()
 books_library = BooksLibrary()
-commands = ['/help', '/more', '/my_books', '/auto_status', '/now_reading', '/change_lang']
+commands = ['/help', '/more', '/auto_status', '/now_reading', '/change_lang']
 lang_list = ['en', 'ru']
 
 logger = BotLogger()
@@ -140,20 +140,20 @@ def switch_needed(message):
     return need
 
 
-@tb.message_handler(commands=['my_books'])
-def show_user_books(message):
-    try:
-        user_id, chat_id = message.from_user.id, message.chat.id
-        logger.log_message(message)
-        tb.send_chat_action(chat_id, 'typing')
-        books_list = books_library.get_user_books(user_id)
-        msg, user_markup = books_list_message(books_list, user_id)
-        tb.send_message(chat_id, msg, reply_markup=user_markup)
-        logger.log_sent(user_id, chat_id, msg)
-        tb.register_next_step_handler(message, process_change_book)
-    except Exception as e:
-        tb.reply_to(message, e)
-        logger.error(e)
+# @tb.message_handler(commands=['my_books'])
+# def show_user_books(message):
+#     try:
+#         user_id, chat_id = message.from_user.id, message.chat.id
+#         logger.log_message(message)
+#         tb.send_chat_action(chat_id, 'typing')
+#         books_list = books_library.get_user_books(user_id)
+#         msg, user_markup = books_list_message(books_list, user_id)
+#         tb.send_message(chat_id, msg, reply_markup=user_markup)
+#         logger.log_sent(user_id, chat_id, msg)
+#         tb.register_next_step_handler(message, process_change_book)
+#     except Exception as e:
+#         tb.reply_to(message, e)
+#         logger.error(e)
 
 
 def books_list_message(books_list, user_id):
@@ -343,7 +343,7 @@ def turn_off_autostatus(user_id, chat_id):
         books_library.switch_auto_staus(user_id)
         lang = books_library.get_lang(user_id)
         auto_off_msg = config.message_everyday_OFF[lang]
-        user_markup = markup(['/start_auto', '/my_books'])
+        user_markup = markup(['/start_auto'])
         tb.send_message(chat_id, auto_off_msg, reply_markup=user_markup)
 
 
@@ -358,7 +358,7 @@ def send_portion(user_id, chat_id):
         res = -1
     elif book_finished(msg):
         msg += config.message_book_finished[
-                   lang] + '/n /start_auto' + '/n /my_books'
+                   lang] + '/n /start_auto'
         turn_off_autostatus(user_id, chat_id)
     else:
         msg += '\n/more'
