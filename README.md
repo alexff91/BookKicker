@@ -21,3 +21,6 @@ Commands:
 
 ##Start server
 nohup python3 telebot_handler.py /dev/null 2>&1&
+
+
+P.S. Based on https://github.com/axtrace/PartyBook
