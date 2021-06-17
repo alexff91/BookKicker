@@ -41,8 +41,8 @@ class DataBase:
                                 database=tokens.db)
         cursor = conn.cursor()
         sql = """
-        INSERT INTO books_pos_table (userId, bookName, pos) VALUES({0}, \"{1}\", {2});
-        UPDATE books_pos_table SET pos={2} WHERE userId={0} and bookName=\"{1}\";
+        INSERT INTO books_pos_table (userId, bookName, pos) VALUES({0}, '{1}', {2});
+        UPDATE books_pos_table SET pos={2} WHERE userId={0} and bookName='{1}';
         """.format(user_id, book_name, newpos)
         cursor.execute(sql)
         cursor.close()
@@ -58,8 +58,8 @@ class DataBase:
                                 database=tokens.db)
         cursor = conn.cursor()
         sql = """
-        INSERT INTO curent_book_table (userId, chatId, bookName, isAutoSend, lang) VALUES({0}, {1}, \"{2}\", {3},  \"{4}\");
-        UPDATE curent_book_table SET bookName=\"{2}\", isAutoSend=1, lang =\"{4}\"  WHERE userId={0};
+        INSERT INTO curent_book_table (userId, chatId, bookName, isAutoSend, lang) VALUES({0}, {1}, '{2}', {3},  '{4}');
+        UPDATE curent_book_table SET bookName='{2}', isAutoSend=1, lang ='{4}'  WHERE userId={0};
         """.format(user_id, chat_id, book_name, 1, lang)
         cursor.execute(sql)
         cursor.close()
@@ -91,7 +91,7 @@ class DataBase:
                                 database=tokens.db)
         cursor = conn.cursor()
         sql = """
-         UPDATE curent_book_table SET lang=\"{0}\" WHERE userId={1};
+         UPDATE curent_book_table SET lang='{0}' WHERE userId={1};
          """.format(lang, user_id)
         cursor.execute(sql)
         cursor.close()
@@ -184,7 +184,7 @@ class DataBase:
                                 database=tokens.db)
         cursor = conn.cursor()
         sql = """
-        SELECT pos FROM books_pos_table WHERE userId={0} and bookName=\"{1}\";
+        SELECT pos FROM books_pos_table WHERE userId={0} and bookName='{1}';
         """.format(user_id, book_name)
         cursor.execute(sql)
         fetchone = cursor.fetchone()
