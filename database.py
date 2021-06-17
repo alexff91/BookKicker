@@ -43,7 +43,10 @@ class DataBase:
                                 database=tokens.db)
         cursor = conn.cursor()
         sql = """
-        INSERT INTO books_pos_table (userId, bookName, pos) VALUES({0}, '{1}', {2});
+        INSERT INTO books_pos_table (userId, bookName, pos) VALUES({0}, '{1}', {2})
+        ON CONFLICT (bookName) 
+        DO 
+         UPDATE SET pos={2} ;
         UPDATE books_pos_table SET pos={2} WHERE userId={0} and bookName='{1}';
         """.format(user_id, book_name, newpos)
         cursor.execute(sql)
