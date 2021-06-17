@@ -22,6 +22,8 @@ class FileExtractor(object):
         downloaded_file, filename = self._get_file_user_sent(telebot, message)
         # todo make it throw regex, ept
         if (filename.find('.epub') != -1):
+            # remove special character
+            filename.isalnum()
             # file_from_user = save_file(downloaded_file, path_for_save, filename)
             path_for_save = os.path.join(download_path, filename)
             with open(path_for_save, 'wb') as new_file:
