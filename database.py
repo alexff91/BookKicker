@@ -43,7 +43,10 @@ class DataBase:
                                 database=tokens.db)
         cursor = conn.cursor()
         sql = """
-        INSERT INTO books_pos_table (userId, bookName, pos) VALUES({0}, '{1}', {2});
+        INSERT INTO books_pos_table (userId, bookName, pos) VALUES({0}, '{1}', {2})
+        ON CONFLICT (userId) 
+        DO 
+         UPDATE SET bookName='{1}', pos={2} ;
         UPDATE books_pos_table SET pos={2} WHERE userId={0} and bookName='{1}';
         """.format(user_id, book_name, newpos)
         cursor.execute(sql)
@@ -61,7 +64,10 @@ class DataBase:
                                 database=tokens.db)
         cursor = conn.cursor()
         sql = """
-        INSERT INTO curent_book_table (userId, chatId, bookName, isAutoSend, lang) VALUES({0}, {1}, '{2}', {3},  '{4}');
+        INSERT INTO curent_book_table (userId, chatId, bookName, isAutoSend, lang) VALUES({0}, {1}, '{2}', {3},  '{4}')
+        ON CONFLICT (userId) 
+        DO 
+         UPDATE SET chatId={1}, bookName='{2}', isAutoSend={3},lang='{4}' ;
         UPDATE curent_book_table SET bookName='{2}', isAutoSend=1, lang ='{4}'  WHERE userId={0};
         """.format(user_id, chat_id, book_name, 1, lang)
         cursor.execute(sql)
