@@ -1,4 +1,5 @@
 import logging
+import re
 
 import config
 from epub_reader import EpubReader
@@ -30,7 +31,13 @@ class FileConverter(object):
     def save_file_as_txt(self, user_id, epub_path, sent_mode='by_sense'):
         # put text of book from epub in new txt file. Return txt file name
         book_reader = EpubReader(epub_path)
-        txt_title = self._make_filename(user_id, book_reader.get_booktitle())
+        book_title = book_reader.get_booktitle()
+        # remove special character
+        book_title.isalnum()
+        txt_title = self._make_filename(user_id, book_title)
+        txt_title.isalnum()
+        txt_title = txt_title.replace("'", "").replace("\\", "")[0:150]
+        txt_title = re.sub('[^A-z0-9 _]', '', txt_title).lower().replace(" ", "_")
         txt_file = TxtFile()
         txt_file.create_file(self._path_for_save, txt_title)
 
