@@ -90,7 +90,7 @@ class DataBase:
         VALUES(1,{0}) 
         ON CONFLICT (userId) 
         DO 
-         UPDATE SET isAutoSend=1;
+         UPDATE SET isAutoSend=NOT isAutoSend;
          """.format(user_id)
         cursor.execute(sql)
         conn.commit()
