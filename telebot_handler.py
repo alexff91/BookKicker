@@ -55,7 +55,7 @@ def webhook():
 book_reader = BookReader()
 book_adder = BookAdder()
 books_library = BooksLibrary()
-commands = ['/help', '/more', '/auto_status', '/now_reading', '/change_lang']
+commands = ['/help', '/more', '/skip', '/auto_status', '/now_reading', '/change_lang']
 lang_list = ['en', 'ru']
 
 logger = BotLogger()
@@ -201,7 +201,18 @@ def listener(message):
     try:
         user_id, chat_id = message.from_user.id, message.chat.id
         # logger.log_message(message)
-        send_portion(user_id, chat_id)
+        send_portion(user_id, chat_id, 0)
+    except Exception as e:
+        tb.reply_to(message, e)
+        # logger.error(e)
+
+
+@tb.message_handler(commands=['skip'])
+def listener(message):
+    try:
+        user_id, chat_id = message.from_user.id, message.chat.id
+        # logger.log_message(message)
+        send_portion(user_id, chat_id, 100)
     except Exception as e:
         tb.reply_to(message, e)
         # logger.error(e)
@@ -347,10 +358,10 @@ def turn_off_autostatus(user_id, chat_id):
         tb.send_message(chat_id, auto_off_msg, reply_markup=user_markup)
 
 
-def send_portion(user_id, chat_id):
+def send_portion(user_id, chat_id, offset):
     logger.info('Sending action TYPING: ', user_id, chat_id)
     tb.send_chat_action(chat_id, 'typing')
-    msg = book_reader.get_next_portion(user_id)
+    msg = book_reader.get_next_portion(user_id, offset)
     lang = books_library.get_lang(user_id)
     res = 0
     if msg is None:
@@ -376,7 +387,7 @@ def auto_send_portions():
     for item in send_list:
         try:
             user_id, chat_id = item[0], item[1]
-            send_portion(user_id, chat_id)
+            send_portion(user_id, chat_id, 0)
         except Exception as e:
             pass
             logger.error(e)

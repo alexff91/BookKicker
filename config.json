@@ -64,7 +64,7 @@
     "en": "------\nChoose a book for reading\uD83D\uDCD6"
   },
   "message_help": {
-    "ru": "Я бот для чтения книг BookKicker\uD83D\uDC7B \uD83D\uDCDA.\nВы можете прислать мне файл книги в формате .epub и начать читать.\n-----\nЯ буду каждый час с 8 утра до 8 вечера присылать маленький отрывок.\nОстановить меня можно командой /stop_auto\nЗапросить очередной кусочек книги можно командой /more\nДругие команды вы можете видеть на клавиатуре в поле ввода.\nПриятного чтения!\nПереключиться на \uD83C\uDDEC\uD83C\uDDE7 /change_lang",
+    "ru": "Я бот для чтения книг BookKicker\uD83D\uDC7B \uD83D\uDCDA.\nВы можете прислать мне файл книги в формате .epub и начать читать.\n-----\nЯ буду каждый час с 8 утра до 8 вечера присылать маленький отрывок.\nОстановить меня можно командой /stop_auto\nЗапросить очередной кусочек книги можно командой /more\nПропустить сразу несколько страниц /skip\nДругие команды вы можете видеть на клавиатуре в поле ввода.\nПриятного чтения!\nПереключиться на \uD83C\uDDEC\uD83C\uDDE7 /change_lang",
     "en": "I am bot BookKicker\uD83D\uDC7B \uD83D\uDCDA for reading books.\nYou can send me .epub file and start reading it.\n-----\nI will send you with a little piece of text every hour.\nYou can request next piece of text by command /more\nYou can stop auto-notification at any moment by command /stop_auto\nOther available commands are on the keyboard under text field.\nGood luck!\nChange language /change_lang"
   },
   "message_empty_booklist": {
