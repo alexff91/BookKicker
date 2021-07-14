@@ -12,6 +12,7 @@ from book_reader import BookReader
 from books_library import BooksLibrary
 from file_extractor import FileExtractor
 from info_logger import BotLogger
+from gtts import gTTS
 
 secret = "GUID"
 
@@ -57,7 +58,6 @@ book_adder = BookAdder()
 books_library = BooksLibrary()
 commands = ['/help', '/more', '/skip', '/auto_status', '/now_reading', '/change_lang']
 lang_list = ['en', 'ru']
-
 logger = BotLogger()
 logger.info('Telebot has been started')
 
@@ -377,6 +377,9 @@ def send_portion(user_id, chat_id, offset):
     while len(msg) > 0:
         logger.info('Send to u_id, c_id: ', user_id, chat_id, 'Message:', msg)
         tb.send_message(chat_id, msg[:m_size], reply_markup=markup([]))
+        tts = gTTS(msg[:m_size])
+        tts.save(str(chat_id) + '.mp3')
+        tb.send_voice(chat_id, str(chat_id) + '.mp3')
         msg = msg[m_size:]
     logger.info('OK')
     return res
