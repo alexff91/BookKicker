@@ -97,11 +97,11 @@ class EpubReader:
         soup = bs(item_doc.content.decode('utf-8'), 'html.parser')
         blacklist = ['[document]', 'noscript', 'header', 'html', 'meta', 'head', 'input', 'script', 'style']
         # there may be more elements you don't want, such as "style", etc.
-        text = soup.find("body")
+        text = soup.find_all(text=True)
         output = ''
         for t in text:
             if t.parent.name not in blacklist:
-                output += '{} '.format(md(str(t), strip=['a']).replace(
+                output += '{} '.format(t.replace(
                     'body {padding:0;} img {height: 100%; max-width: 100%;} div {text-align: center; page-break-after: always;}',
                     '\n')
                                        .replace('Cover of ', '')
@@ -112,7 +112,7 @@ class EpubReader:
                     'page {padding: 0pt; margin:0pt} body { text-align: center; padding:0pt; margin: 0pt; }', '')
                                        .replace(
                     'Cover @page {padding: 0pt; margin:0pt} body { text-align: center; padding:0pt; margin: 0pt; }',
-                    '').replace('Annotation', '\n').replace('\n\n\n', '\n\n'))
+                    '').replace('Annotation', '\n'))
         return output
 
     def _get_item_images(self):
