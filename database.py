@@ -28,7 +28,8 @@ class DataBase:
             chatId INTEGER,
             bookName TEXT UNIQUE,
             isAutoSend INTEGER,
-            lang TEXT);
+            lang TEXT,
+            audio BOOLEAN);
             """
         cursor.execute(sql2)
         cursor.close()
@@ -113,6 +114,31 @@ class DataBase:
         DO 
          UPDATE SET lang='{2}';
          """.format(lang, user_id, lang)
+        cursor.execute(sql)
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return 0
+
+    def update_audio(self, user_id, audio):
+        # change audio for user
+        if audio == 'on':
+            audio = 'true'
+        else:
+            audio = 'false'
+        conn = psycopg2.connect(user=tokens.user,
+                                password=tokens.password,
+                                host=tokens.host,
+                                port="5432",
+                                database=tokens.db)
+        cursor = conn.cursor()
+        sql = """
+         INSERT INTO curent_book_table (audio, userId)
+         VALUES({0},{1}) 
+         ON CONFLICT (userId) 
+         DO 
+          UPDATE SET audio={2};
+          """.format(audio, user_id, audio)
         cursor.execute(sql)
         conn.commit()
         cursor.close()
@@ -236,4 +262,29 @@ class DataBase:
             res = fetchone[0]
         cursor.close()
         conn.close()
+        return res
+
+    def get_audio(self, user_id):
+        # Return audio for user
+        conn = psycopg2.connect(user=tokens.user,
+                                password=tokens.password,
+                                host=tokens.host,
+                                port="5432",
+                                database=tokens.db)
+        cursor = conn.cursor()
+        sql = """
+        SELECT audio FROM curent_book_table WHERE userId={0};
+        """.format(user_id)
+        cursor.execute(sql)
+        fetchone = cursor.fetchone()
+        if fetchone is None or None in fetchone:
+            res = None
+        else:
+            res = fetchone[0]
+        cursor.close()
+        conn.close()
+        if res:
+            res = 'on'
+        else:
+            res = 'off'
         return res

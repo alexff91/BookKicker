@@ -7,6 +7,7 @@ class BooksLibrary(object):
     def __init__(self):
         self.db = DataBase()
         self.lang_cache = {}
+        self.audio_cache = {}
         self.pos_cache = {}
 
     def update_current_book(self, user_id, chat_id, book_name):
@@ -27,6 +28,11 @@ class BooksLibrary(object):
         self.lang_cache[user_id] = lang
         return 0
 
+    def update_audio(self, user_id, audio):
+        self.db.update_audio(user_id, audio)
+        self.audio_cache[user_id] = audio
+        return 0
+
     def get_pos(self, user_id, book_name):
         return self.db.get_pos(user_id, book_name)
 
@@ -38,6 +44,15 @@ class BooksLibrary(object):
                 lang = 'ru'
                 self.update_lang(user_id, lang)
         return lang
+
+    def get_audio(self, user_id):
+        audio = self.audio_cache.get(user_id, None)
+        if audio is None:
+            audio = self.db.get_audio(user_id)
+            if audio is None:
+                audio = 'off'
+                self.update_audio(user_id, audio)
+        return audio
 
     def get_user_books(self, user_id):
         return self.db.get_user_books(user_id)

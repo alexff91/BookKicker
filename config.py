@@ -23,6 +23,7 @@ message_now_reading = cfg.get('message_now_reading', '')
 message_booklist = cfg.get('message_booklist', '')
 message_choose_book = cfg.get('message_choose_book', '')
 message_lang_changed = cfg.get('message_lang_changed', '')
+message_audio_changed = cfg.get('message_audio_changed', '')
 message_empty_booklist = cfg.get('message_empty_booklist', '')
 
 error_file_type = cfg.get('error_file_type', '')
@@ -31,6 +32,7 @@ error_current_book = cfg.get('error_current_book', '')
 error_book_recognition = cfg.get('error_book_recognition', '')
 error_user_finding = cfg.get('error_user_finding', '')
 error_lang_recognition = cfg.get('error_lang_recognition', '')
+error_audio_recognition = cfg.get('error_audio_recognition', '')
 
 webhook_port = 8443  # 443, 80, 88 or 8443 (port need to be 'open')
 webhook_listen = '0.0.0.0'

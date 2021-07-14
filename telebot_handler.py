@@ -56,8 +56,9 @@ def webhook():
 book_reader = BookReader()
 book_adder = BookAdder()
 books_library = BooksLibrary()
-commands = ['/help', '/more', '/skip', '/auto_status', '/now_reading', '/change_lang']
+commands = ['/help', '/more', '/skip', '/auto_status', '/now_reading', '/change_lang', '/audio']
 lang_list = ['en', 'ru']
+audio_list = ['on', 'off']
 logger = BotLogger()
 logger.info('Telebot has been started')
 
@@ -315,6 +316,14 @@ def change_lang_handler(message):
     logger.log_sent(user_id, chat_id, msg)
     tb.register_next_step_handler(message, change_lang)
 
+@tb.message_handler(commands=['audio'])
+def change_lang_handler(message):
+    user_id, chat_id = message.from_user.id, message.chat.id
+    logger.log_message(message)
+    msg = 'Audiobook mode on or off\n'
+    tb.send_message(chat_id, msg, reply_markup=markup(audio_list))
+    logger.log_sent(user_id, chat_id, msg)
+    tb.register_next_step_handler(message, change_audio)
 
 def change_lang(message):
     user_id, chat_id = message.from_user.id, message.chat.id
@@ -328,6 +337,17 @@ def change_lang(message):
     tb.send_message(chat_id, msg)
     logger.log_sent(user_id, chat_id, msg)
 
+def change_audio(message):
+    user_id, chat_id = message.from_user.id, message.chat.id
+    cur_audio = books_library.get_audio(user_id)
+    new_audio = message.text
+    if new_audio in audio_list:
+        books_library.update_audio(user_id, new_audio)
+        msg = config.message_audio_changed[new_audio]
+    else:
+        msg = config.error_audio_recognition[cur_audio]
+    tb.send_message(chat_id, msg)
+    logger.log_sent(user_id, chat_id, msg)
 
 @tb.message_handler(func=lambda message: True, content_types=['text'])
 def command_default(message):
@@ -374,13 +394,15 @@ def send_portion(user_id, chat_id, offset):
     else:
         msg += '\n/more'
     m_size = config.max_msg_size  # max message size
+    audio = books_library.get_audio(user_id)
     while len(msg) > 0:
         logger.info('Send to u_id, c_id: ', user_id, chat_id, 'Message:', msg)
         tb.send_message(chat_id, msg[:m_size], reply_markup=markup([]), parse_mode='Markdown')
-        tts = gTTS(msg[:m_size], lang='ru')
-        tts.save(str(chat_id) + '.ogg')
-        audio = open(str(chat_id) + '.ogg', 'rb')
-        tb.send_voice(chat_id, audio, disable_notification=True)
+        if audio == 'on':
+            tts = gTTS(msg[:m_size], lang='ru')
+            tts.save(str(chat_id) + '.ogg')
+            audio = open(str(chat_id) + '.ogg', 'rb')
+            tb.send_voice(chat_id, audio, disable_notification=True)
         msg = msg[m_size:]
     logger.info('OK')
     return res
