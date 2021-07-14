@@ -378,8 +378,9 @@ def send_portion(user_id, chat_id, offset):
         logger.info('Send to u_id, c_id: ', user_id, chat_id, 'Message:', msg)
         tb.send_message(chat_id, msg[:m_size], reply_markup=markup([]), parse_mode='Markdown')
         tts = gTTS(msg[:m_size])
-        tts.save(str(chat_id) + '.mp3')
-        tb.send_audio(chat_id, str(chat_id) + '.mp3', disable_notification=True)
+        tts.save(str(chat_id) + '.ogg')
+        audio = open(str(chat_id) + '.ogg', 'rb')
+        tb.send_voice(chat_id, audio, disable_notification=True)
         msg = msg[m_size:]
     logger.info('OK')
     return res
