@@ -320,7 +320,7 @@ def change_lang_handler(message):
 def change_lang_handler(message):
     user_id, chat_id = message.from_user.id, message.chat.id
     logger.log_message(message)
-    msg = 'Audiobook mode on or off\n'
+    msg = 'Включить или выключить режим аудиокниги\n'
     tb.send_message(chat_id, msg, reply_markup=markup(audio_list))
     logger.log_sent(user_id, chat_id, msg)
     tb.register_next_step_handler(message, change_audio)
@@ -339,13 +339,13 @@ def change_lang(message):
 
 def change_audio(message):
     user_id, chat_id = message.from_user.id, message.chat.id
-    cur_audio = books_library.get_audio(user_id)
+    cur_lang = books_library.get_lang(user_id)
     new_audio = message.text
     if new_audio in audio_list:
         books_library.update_audio(user_id, new_audio)
-        msg = config.message_audio_changed[new_audio]
+        msg = config.message_audio_changed[cur_lang]
     else:
-        msg = config.error_audio_recognition[cur_audio]
+        msg = config.error_audio_recognition[cur_lang]
     tb.send_message(chat_id, msg)
     logger.log_sent(user_id, chat_id, msg)
 
