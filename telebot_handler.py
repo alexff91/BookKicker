@@ -376,10 +376,10 @@ def send_portion(user_id, chat_id, offset):
     m_size = config.max_msg_size  # max message size
     while len(msg) > 0:
         logger.info('Send to u_id, c_id: ', user_id, chat_id, 'Message:', msg)
-        tb.send_message(chat_id, msg[:m_size], reply_markup=markup([]))
+        tb.send_message(chat_id, msg[:m_size], reply_markup=markup([]), parse_mode='Markdown')
         tts = gTTS(msg[:m_size])
-        tts.save(str(chat_id) + '.mp3')
-        tb.send_voice(chat_id, str(chat_id) + '.mp3')
+        tts.save(str(chat_id) + '.ogg')
+        tb.send_voice(chat_id, str(chat_id) + '.ogg',disable_notification=True)
         msg = msg[m_size:]
     logger.info('OK')
     return res

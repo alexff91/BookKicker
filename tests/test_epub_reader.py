@@ -26,7 +26,7 @@ class TestEpubReader(unittest.TestCase):
     def test_book_3rd_text(self):
         # check first word from text of 3rd doc
         efr = EpubReader(self.epub_path)
-        for i in range(4):
+        for i in range(20):
             text = efr.get_next_item_text()
         result = text.split()
         self.assertEqual(result[1], 'II')

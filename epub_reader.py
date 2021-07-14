@@ -1,6 +1,7 @@
 import ebooklib
 from bs4 import BeautifulSoup as bs
 from ebooklib import epub
+from markdownify import markdownify as md
 
 
 def chap2text(chap):
@@ -47,6 +48,7 @@ class EpubReader:
             self.book = epub.read_epub(epub_path)
             self.spine_ids = self._get_spine_ids()
             self.item_ids = self._get_item_ids()
+            self.images = self._get_item_images()
             # sort list of docs ids in order they follow in spine_ids
             self.item_ids.sort(key=self._sort_by_spine)
         else:
@@ -95,11 +97,11 @@ class EpubReader:
         soup = bs(item_doc.content.decode('utf-8'), 'html.parser')
         blacklist = ['[document]', 'noscript', 'header', 'html', 'meta', 'head', 'input', 'script', 'style']
         # there may be more elements you don't want, such as "style", etc.
-        text = soup.find_all(text=True)
+        text = soup.find("body")
         output = ''
         for t in text:
             if t.parent.name not in blacklist:
-                output += '{} '.format(t.replace(
+                output += '{} '.format(md(str(t), strip=['a']).replace(
                     'body {padding:0;} img {height: 100%; max-width: 100%;} div {text-align: center; page-break-after: always;}',
                     '\n')
                                        .replace('Cover of ', '')
@@ -110,5 +112,15 @@ class EpubReader:
                     'page {padding: 0pt; margin:0pt} body { text-align: center; padding:0pt; margin: 0pt; }', '')
                                        .replace(
                     'Cover @page {padding: 0pt; margin:0pt} body { text-align: center; padding:0pt; margin: 0pt; }',
-                    '').replace('Annotation', '\n'))
+                    '').replace('Annotation', '\n').replace('\n\n\n', '\n\n'))
         return output
+
+    def _get_item_images(self):
+        images = []
+        # doc_item_list = self.book.get_items_of_type(ebooklib.ITEM_IMAGE)
+        # for elem in doc_item_list:
+        #     images.append(elem.id)
+        #     with open("./files/" + elem.book.uid + "/" + elem.file_name, "wb") as binary_file:
+        #         # Write bytes to file
+        #         binary_file.write(elem.content)
+        return images
