@@ -220,11 +220,11 @@ def listener(message):
 def callback_query(call):
     if call.data == "more":
         try:
-            user_id, chat_id = call.from_user.id, call.chat.id
+            user_id, chat_id = call.message.from_user.id, call.message.chat.id
             # logger.log_message(message)
             send_portion(user_id, chat_id, 0)
         except Exception as e:
-            tb.reply_to(call, "Что-то пошло не так..")
+            tb.reply_to(call.message.from_user.id, "Что-то пошло не так..")
             logger.error(e)
 
 
