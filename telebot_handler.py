@@ -1,9 +1,11 @@
 import sys
+import time
 
+import flask
 import telebot
 from apscheduler.schedulers.background import BackgroundScheduler
-import time
-import flask
+from gtts import gTTS
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 import config
 import tokens
@@ -12,7 +14,6 @@ from book_reader import BookReader
 from books_library import BooksLibrary
 from file_extractor import FileExtractor
 from info_logger import BotLogger
-from gtts import gTTS
 
 secret = "GUID"
 
@@ -63,6 +64,13 @@ logger = BotLogger()
 logger.info('Telebot has been started')
 
 poem_mode_user_id_list = set()  # set of user_id which choose poem_mode before sending a book file
+
+
+def gen_markup():
+    markup = InlineKeyboardMarkup()
+    markup.row_width = 1
+    markup.add(InlineKeyboardButton("More", callback_data="more"))
+    return markup
 
 
 def markup(clist):
@@ -208,6 +216,18 @@ def listener(message):
         # logger.error(e)
 
 
+@tb.callback_query_handler(func=lambda call: True)
+def callback_query(call):
+    if call.data == "more":
+        try:
+            user_id, chat_id = call.from_user.id, call.chat.id
+            # logger.log_message(message)
+            send_portion(user_id, chat_id, 0)
+        except Exception as e:
+            tb.reply_to(call, "Что-то пошло не так..")
+            logger.error(e)
+
+
 @tb.message_handler(commands=['skip'])
 def listener(message):
     try:
@@ -316,6 +336,7 @@ def change_lang_handler(message):
     logger.log_sent(user_id, chat_id, msg)
     tb.register_next_step_handler(message, change_lang)
 
+
 @tb.message_handler(commands=['audio'])
 def change_lang_handler(message):
     user_id, chat_id = message.from_user.id, message.chat.id
@@ -324,6 +345,7 @@ def change_lang_handler(message):
     tb.send_message(chat_id, msg, reply_markup=markup(audio_list))
     logger.log_sent(user_id, chat_id, msg)
     tb.register_next_step_handler(message, change_audio)
+
 
 def change_lang(message):
     user_id, chat_id = message.from_user.id, message.chat.id
@@ -337,6 +359,7 @@ def change_lang(message):
     tb.send_message(chat_id, msg)
     logger.log_sent(user_id, chat_id, msg)
 
+
 def change_audio(message):
     user_id, chat_id = message.from_user.id, message.chat.id
     cur_lang = books_library.get_lang(user_id)
@@ -348,6 +371,7 @@ def change_audio(message):
         msg = config.error_audio_recognition[cur_lang]
     tb.send_message(chat_id, msg)
     logger.log_sent(user_id, chat_id, msg)
+
 
 @tb.message_handler(func=lambda message: True, content_types=['text'])
 def command_default(message):
@@ -391,13 +415,13 @@ def send_portion(user_id, chat_id, offset):
         msg += config.message_book_finished[
                    lang] + '/n /start_auto'
         turn_off_autostatus(user_id, chat_id)
-    else:
-        msg += '\n/more'
+    # else:
+    # msg += '\n/more'
     m_size = config.max_msg_size  # max message size
     audio = books_library.get_audio(user_id)
     while len(msg) > 0:
         logger.info('Send to u_id, c_id: ', user_id, chat_id, 'Message:', msg)
-        tb.send_message(chat_id, msg[:m_size], reply_markup=markup([]), parse_mode='Markdown')
+        tb.send_message(chat_id, msg[:m_size], reply_markup=gen_markup(), parse_mode='Markdown')
         if audio == 'on':
             tts = gTTS(msg[:m_size], lang='ru')
             tts.save(str(chat_id) + '.ogg')
