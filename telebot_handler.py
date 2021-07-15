@@ -67,10 +67,10 @@ poem_mode_user_id_list = set()  # set of user_id which choose poem_mode before s
 
 
 def gen_markup():
-    markup = InlineKeyboardMarkup()
-    markup.row_width = 1
-    markup.add(InlineKeyboardButton("More", callback_data="more"))
-    return markup
+    keyboard_markup = InlineKeyboardMarkup()
+    keyboard_markup.row_width = 1
+    keyboard_markup.add(InlineKeyboardButton("More", callback_data="more"))
+    return keyboard_markup
 
 
 def markup(clist):
