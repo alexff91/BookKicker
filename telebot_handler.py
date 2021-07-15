@@ -218,14 +218,15 @@ def listener(message):
 
 @tb.callback_query_handler(func=lambda call: True)
 def callback_query(call):
-    if call.data == "more":
-        try:
-            user_id, chat_id = call.from_user.id, call.message.chat.id
-            # logger.log_message(message)
-            send_portion(user_id, chat_id, 0)
-        except Exception as e:
-            tb.reply_to(call.message, "Что-то пошло не так..")
-            logger.error(e)
+    logger.info(call)
+    # if call.data == "more":
+    #     try:
+    #         user_id, chat_id = call.from_user.id, call.message.chat.id
+    #         # logger.log_message(message)
+    #         send_portion(user_id, chat_id, 0)
+    #     except Exception as e:
+    #         tb.reply_to(call.message, "Что-то пошло не так..")
+    #         logger.error(e)
 
 
 @tb.message_handler(commands=['skip'])
