@@ -216,17 +216,17 @@ def listener(message):
         # logger.error(e)
 
 
-# @tb.callback_query_handler(func=lambda call: True)
-# def callback_query(call):
-#     # logger.info(call)
-#     if call.data == "some_more":
-#         try:
-#             user_id, chat_id = call.from_user.id, call.message.chat.id
-#             # logger.log_message(message)
-#             send_portion(user_id, chat_id, 0)
-#         except Exception as e:
-#             tb.reply_to(call.message, "Что-то пошло не так..")
-#             logger.error(e)
+@tb.callback_query_handler(func=lambda call: True)
+def callback_query(call):
+    # logger.info(call)
+    if call.data == "some_more":
+        try:
+            user_id, chat_id = call.from_user.id, call.message.chat.id
+            # logger.log_message(message)
+            send_portion(user_id, chat_id, 0)
+        except Exception as e:
+            tb.reply_to(call.message, "Что-то пошло не так..")
+            logger.error(e)
 
 
 @tb.message_handler(commands=['skip'])
@@ -422,8 +422,8 @@ def send_portion(user_id, chat_id, offset):
     audio = books_library.get_audio(user_id)
     while len(msg) > 0:
         logger.info('Send to u_id, c_id: ', user_id, chat_id, 'Message:', msg)
-        # tb.send_message(chat_id, msg[:m_size], reply_markup=gen_markup(), parse_mode='Markdown')
-        tb.send_message(chat_id, msg[:m_size], reply_markup=markup([]), parse_mode='Markdown')
+        tb.send_message(chat_id, msg[:m_size], reply_markup=gen_markup(), parse_mode='Markdown')
+        # tb.send_message(chat_id, msg[:m_size], reply_markup=markup([]), parse_mode='Markdown')
         if audio == 'on':
             tts = gTTS(msg[:m_size], lang='ru')
             tts.save(str(chat_id) + '.ogg')
