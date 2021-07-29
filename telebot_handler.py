@@ -377,9 +377,10 @@ def change_lang(message):
 def change_rare(message):
     user_id, chat_id = message.from_user.id, message.chat.id
     new_rare = message.text
+    cur_lang = books_library.get_lang(user_id)
     if new_rare in rare_list:
         books_library.update_rare(user_id, new_rare)
-        msg = config.message_rare_changed[new_rare]
+        msg = config.message_rare_changed[cur_lang]
         tb.send_message(chat_id, msg)
         logger.log_sent(user_id, chat_id, msg)
 
