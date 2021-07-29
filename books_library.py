@@ -43,7 +43,7 @@ class BooksLibrary(object):
         else:
             rare = 12
         self.db.update_rare(user_id, rare)
-        self.rare_cache[user_id] = rare
+        self.rare_cache[user_id] = str(rare)
         return 0
 
     def update_audio(self, user_id, audio):
