@@ -29,7 +29,8 @@ class DataBase:
             bookName TEXT UNIQUE,
             isAutoSend INTEGER,
             lang TEXT,
-            audio BOOLEAN);
+            audio BOOLEAN,
+            rare VARCHAR);
             """
         cursor.execute(sql2)
         cursor.close()
@@ -114,6 +115,27 @@ class DataBase:
         DO 
          UPDATE SET lang='{2}';
          """.format(lang, user_id, lang)
+        cursor.execute(sql)
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return 0
+
+    def update_rare(self, user_id, rare):
+        # change lang for user
+        conn = psycopg2.connect(user=tokens.user,
+                                password=tokens.password,
+                                host=tokens.host,
+                                port="5432",
+                                database=tokens.db)
+        cursor = conn.cursor()
+        sql = """
+        INSERT INTO curent_book_table (rare, userId)
+        VALUES('{0}',{1}) 
+        ON CONFLICT (userId) 
+        DO 
+         UPDATE SET rare='{2}';
+         """.format(rare, user_id, rare)
         cursor.execute(sql)
         conn.commit()
         cursor.close()
@@ -253,6 +275,27 @@ class DataBase:
         cursor = conn.cursor()
         sql = """
         SELECT lang FROM curent_book_table WHERE userId={0};
+        """.format(user_id)
+        cursor.execute(sql)
+        fetchone = cursor.fetchone()
+        if fetchone is None or None in fetchone:
+            res = None
+        else:
+            res = fetchone[0]
+        cursor.close()
+        conn.close()
+        return res
+
+    def get_rare(self, user_id):
+        # Return lang for user
+        conn = psycopg2.connect(user=tokens.user,
+                                password=tokens.password,
+                                host=tokens.host,
+                                port="5432",
+                                database=tokens.db)
+        cursor = conn.cursor()
+        sql = """
+        SELECT rare FROM curent_book_table WHERE userId={0};
         """.format(user_id)
         cursor.execute(sql)
         fetchone = cursor.fetchone()

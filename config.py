@@ -23,6 +23,7 @@ message_now_reading = cfg.get('message_now_reading', '')
 message_booklist = cfg.get('message_booklist', '')
 message_choose_book = cfg.get('message_choose_book', '')
 message_lang_changed = cfg.get('message_lang_changed', '')
+message_rare_changed = cfg.get('message_rare_changed', '')
 message_audio_changed = cfg.get('message_audio_changed', '')
 message_empty_booklist = cfg.get('message_empty_booklist', '')
 

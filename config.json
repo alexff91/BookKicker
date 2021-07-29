@@ -55,6 +55,10 @@
     "ru": "Язык успешно изменен.\nПомощь: /help",
     "en": "Success! Language has been changed.\nSee commands at /help"
   },
+  "message_rare_changed": {
+    "ru": "Частота отправки сообщений успешно изменена.\nПомощь: /help",
+    "en": "Success! Frequency of auto-messages is changed.\nSee commands at /help"
+  },
   "message_audio_changed": {
     "ru": "Функция аудиовоспроизведения книги была переключена.\nПомощь: /help",
     "en": "Function of audiobook was changed.\nSee commands at /help"
@@ -72,8 +76,8 @@
     "en": "------\nChoose a book for reading\uD83D\uDCD6"
   },
   "message_help": {
-    "ru": "Я бот для чтения книг BookKicker\uD83D\uDC7B \uD83D\uDCDA.\nВы можете прислать мне файл книги в формате .epub и начать читать.\n-----\nЯ буду каждый час с 8 утра до 8 вечера присылать маленький отрывок.\nОстановить меня можно командой /stop_auto\nЗапросить очередной кусочек книги можно командой /more\nПропустить сразу несколько страниц /skip\nВключить режим прослушивания книг /audio\nДругие команды вы можете видеть на клавиатуре в поле ввода.\nПриятного чтения!\nПереключиться на \uD83C\uDDEC\uD83C\uDDE7 /change_lang",
-    "en": "I am bot BookKicker\uD83D\uDC7B \uD83D\uDCDA for reading books.\nYou can send me .epub file and start reading it.\n-----\nI will send you with a little piece of text every hour.\nYou can request next piece of text by command /more\nYou can skip a few pages by text by command /skip\nYou can turn on audio mode by command /audio\nYou can stop auto-notification at any moment by command /stop_auto\nOther available commands are on the keyboard under text field.\nGood luck!\nChange language /change_lang"
+    "ru": "Я бот для чтения книг BookKicker\uD83D\uDC7B \uD83D\uDCDA.\nВы можете прислать мне файл книги в формате .epub и начать читать.\n-----\nЯ буду каждый час с 8 утра до 8 вечера присылать маленький отрывок.\nОстановить меня можно командой /stop_auto\nЗапросить очередной кусочек книги можно командой /more\nПропустить сразу несколько страниц /skip\nИзменить частоту отправки сообщений /rare\nВключить режим прослушивания книг /audio\nДругие команды вы можете видеть на клавиатуре в поле ввода.\nПриятного чтения!\nПереключиться на \uD83C\uDDEC\uD83C\uDDE7 /change_lang",
+    "en": "I am bot BookKicker\uD83D\uDC7B \uD83D\uDCDA for reading books.\nYou can send me .epub file and start reading it.\n-----\nI will send you with a little piece of text every hour.\nYou can request next piece of text by command /more\nYou can skip a few pages by text by command /skip\nYou can change frequency of messages by command /rare\nYou can turn on audio mode by command /audio\nYou can stop auto-notification at any moment by command /stop_auto\nOther available commands are on the keyboard under text field.\nGood luck!\nChange language /change_lang"
   },
   "message_empty_booklist": {
     "ru": "Список книг пуст\uD83D\uDE25\n",

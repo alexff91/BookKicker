@@ -1,3 +1,4 @@
+import datetime
 import sys
 import time
 
@@ -57,8 +58,9 @@ def webhook():
 book_reader = BookReader()
 book_adder = BookAdder()
 books_library = BooksLibrary()
-commands = ['/help', '/more', '/skip', '/auto_status', '/now_reading', '/change_lang', '/audio']
+commands = ['/help', '/more', '/skip', '/auto_status', '/now_reading', '/change_lang', '/audio', '/rare']
 lang_list = ['en', 'ru']
+rare_list = ['12 раз в день', '6 раз в день', '4 раза в день', '2 раза в день', '1 раз в день']
 audio_list = ['on', 'off']
 logger = BotLogger()
 logger.info('Telebot has been started')
@@ -338,6 +340,17 @@ def change_lang_handler(message):
     tb.register_next_step_handler(message, change_lang)
 
 
+@tb.message_handler(commands=['rare'])
+def set_rare_mode(message):
+    user_id, chat_id = message.from_user.id, message.chat.id
+    logger.log_message(message)
+    msg = format('Выберите как часто бот будет отправлять вам сообщения, сейчас отправка происходит {0} раз в день.',
+                 books_library.get_rare(user_id))
+    tb.send_message(chat_id, msg, reply_markup=markup(rare_list))
+    logger.log_sent(user_id, chat_id, msg)
+    tb.register_next_step_handler(message, change_rare)
+
+
 @tb.message_handler(commands=['audio'])
 def change_lang_handler(message):
     user_id, chat_id = message.from_user.id, message.chat.id
@@ -359,6 +372,16 @@ def change_lang(message):
         msg = config.error_lang_recognition[cur_lang]
     tb.send_message(chat_id, msg)
     logger.log_sent(user_id, chat_id, msg)
+
+
+def change_rare(message):
+    user_id, chat_id = message.from_user.id, message.chat.id
+    new_rare = message.text
+    if new_rare in rare_list:
+        books_library.update_rare(user_id, new_rare)
+        msg = config.message_rare_changed[new_rare]
+        tb.send_message(chat_id, msg)
+        logger.log_sent(user_id, chat_id, msg)
 
 
 def change_audio(message):
@@ -436,10 +459,24 @@ def send_portion(user_id, chat_id, offset):
 
 def auto_send_portions():
     send_list = books_library.get_users_for_autosend()
+    now = datetime.datetime.now()
     for item in send_list:
         try:
             user_id, chat_id = item[0], item[1]
-            send_portion(user_id, chat_id, 0)
+            how_rare = books_library.get_rare(user_id)
+            if how_rare == '12':
+                send_portion(user_id, chat_id, 0)
+            if (how_rare == '6' and (
+                    now.hour == 5 or now.hour == 7 or now.hour == 9
+                    or now.hour == 11 or now.hour == 13 or now.hour == 15
+                    or now.hour == 17)):
+                send_portion(user_id, chat_id, 0)
+            if how_rare == '4' and (now.hour == 5 or now.hour == 9 or now.hour == 15 or now.hour == 17):
+                send_portion(user_id, chat_id, 0)
+            if how_rare == '2' and (now.hour == 9 or now.hour == 15):
+                send_portion(user_id, chat_id, 0)
+            if how_rare == '1' and now.hour == 9:
+                send_portion(user_id, chat_id, 0)
         except Exception as e:
             pass
             logger.error(e)

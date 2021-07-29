@@ -7,6 +7,7 @@ class BooksLibrary(object):
     def __init__(self):
         self.db = DataBase()
         self.lang_cache = {}
+        self.rare_cache = {}
         self.audio_cache = {}
         self.pos_cache = {}
 
@@ -28,6 +29,23 @@ class BooksLibrary(object):
         self.lang_cache[user_id] = lang
         return 0
 
+    def update_rare(self, user_id, rare):
+        if rare == '12 раз в день':
+            rare = 12
+        elif rare == '6 раз в день':
+            rare = 6
+        elif rare == '4 раза в день':
+            rare = 4
+        elif rare == '2 раза в день':
+            rare = 2
+        elif rare == '1 раз в день':
+            rare = 1
+        else:
+            rare = 12
+        self.db.update_rare(user_id, rare)
+        self.rare_cache[user_id] = rare
+        return 0
+
     def update_audio(self, user_id, audio):
         self.db.update_audio(user_id, audio)
         self.audio_cache[user_id] = audio
@@ -44,6 +62,15 @@ class BooksLibrary(object):
                 lang = 'ru'
                 self.update_lang(user_id, lang)
         return lang
+
+    def get_rare(self, user_id):
+        rare = self.rare_cache.get(user_id, None)
+        if rare is None:
+            rare = self.db.get_rare(user_id)
+            if rare is None:
+                rare = '12'
+                self.update_rare(user_id, '12 раз в день')
+        return rare
 
     def get_audio(self, user_id):
         audio = self.audio_cache.get(user_id, None)
