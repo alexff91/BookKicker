@@ -344,7 +344,7 @@ def change_lang_handler(message):
 def set_rare_mode(message):
     user_id, chat_id = message.from_user.id, message.chat.id
     logger.log_message(message)
-    msg = format('Выберите как часто бот будет отправлять вам сообщения, сейчас отправка происходит {0} раз в день.',
+    msg = 'Выберите как часто бот будет отправлять вам сообщения, сейчас отправка происходит {0} раз в день.'.format(
                  books_library.get_rare(user_id))
     tb.send_message(chat_id, msg, reply_markup=markup(rare_list))
     logger.log_sent(user_id, chat_id, msg)
