@@ -486,7 +486,7 @@ def auto_send_portions():
 
 if __name__ == '__main__':
     scheduler = BackgroundScheduler()
-    scheduler.add_job(auto_send_portions, 'cron', hour='5,6,7,8,9,10,11,12,13,14,15,16,17', misfire_grace_time=3600)
+    scheduler.add_job(auto_send_portions, trigger='cron', hour='5,6,7,8,9,10,11,12,13,14,15,16,17', misfire_grace_time=3600)
     scheduler.start()
     if '--prod' in sys.argv:
         while True:
