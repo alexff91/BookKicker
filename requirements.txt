@@ -6,7 +6,7 @@ chardet==3.0.4
 -e git://github.com/aerkalov/ebooklib.git@c8cb21f31c2769b1ce1052e18df49852f96de1b9#egg=EbookLib
 idna==2.7
 langdetect==1.0.7
-lxml==4.2.4
+lxml==4.6.5
 nltk==3.3
 pyTelegramBotAPI==3.8.1
 pytz==2018.5
