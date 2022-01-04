@@ -37,7 +37,7 @@ class TextSeparator(object):
                           text,
                           flags=re.M)
             # make one big string from all textlines and then separate them by dot
-            text = re.sub(r'\s+', ' ', text, flags=re.M)
+            # text = re.sub(r'\s+', ' ', text, flags=re.M)
             self._output_sentences = sent_tokenize(text, 'russian')
             # todo: auto detect lang
             # todo: limit max sentence size

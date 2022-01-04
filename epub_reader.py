@@ -112,7 +112,7 @@ class EpubReader:
                     'page {padding: 0pt; margin:0pt} body { text-align: center; padding:0pt; margin: 0pt; }', '')
                                        .replace(
                     'Cover @page {padding: 0pt; margin:0pt} body { text-align: center; padding:0pt; margin: 0pt; }',
-                    '').replace('Annotation', '\n'))
+                    '').replace('Annotation', '\n')) + "\n"
         return output
 
     def _get_item_images(self):

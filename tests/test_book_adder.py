@@ -5,7 +5,7 @@ from file_converter import FileConverter
 
 class TestBookAdder(unittest.TestCase):
     def setUp(self):
-        self.epub_path = os.path.join(os.getcwd(), 'Taganov_Rybya-Krov_3_Morskoy-knyaz.VHl1UQ.432728.fb2')
+        self.epub_path = os.path.join(os.getcwd(), 'test_book._some_spacec.here.epub')
         pass
 
     def tearDown(self):
@@ -13,8 +13,7 @@ class TestBookAdder(unittest.TestCase):
 
     def test_book_3rd_text(self):
         file_converter = FileConverter()
-        book_name = file_converter.save_file_as_txt(140887, self.epub_path,
-                                                    sent_mode="by_sense")
+        book_name = file_converter.save_file_as_txt(140887, self.epub_path)
         pass
 
 
