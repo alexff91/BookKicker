@@ -7,7 +7,7 @@ chardet==3.0.4
 idna==2.7
 langdetect==1.0.7
 lxml==4.2.4
-nltk==3.3
+nltk==3.6.3
 pyTelegramBotAPI==3.8.1
 pytz==2018.5
 requests==2.25.1
