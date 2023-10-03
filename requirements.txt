@@ -13,7 +13,7 @@ pytz==2018.5
 requests==2.31.0
 six==1.11.0
 transliterate==1.10.1
-urllib3==1.26.5
+urllib3==1.26.17
 gTTS==2.2.3
 markdownify==0.9.2
 FB2==0.1.7
